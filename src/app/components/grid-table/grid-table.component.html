@@ -1,0 +1,130 @@
+
+<div class="main-card">
+<div class="team-member">
+<span class="" style="font-size: 20px;">Team Members </span> 
+<span class="badge rounded-pill team-member-count">{{totalTeamMembers}} users</span>
+</div>
+
+
+<div class="grid-container">
+  <div class="table-scroll">
+
+  
+<table>
+    <tr >
+        <th><input
+            type="checkbox"
+            class="checkbox"
+            [checked]="allSelected"
+            (change)="toggleSelectAll()"
+          /></th>
+        <th *ngFor="let col of columns">
+        {{col.column_name}}
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    <tbody>
+        <tr *ngFor="let row of rows; let i = index">
+            <td>
+                <input
+                  type="checkbox"
+                  [checked]="isSelected(row.id)"
+          (change)="toggleRowSelection(row.id)"
+                />
+              </td>
+<td  *ngFor="let col of columns">
+    <ng-container [ngSwitch]="col.type">
+
+          <span *ngSwitchCase="'name'">
+          <span> {{ row.name.first_name }} {{ row.name.last_name }} </span><br />
+          ({{ row.name.handle }}) 
+          </span>
+
+         
+          <span *ngSwitchCase="'status'">{{ row.status }}</span>
+
+          
+          <span *ngSwitchCase="'text'">{{ row[col.column_key] }}</span>
+
+          
+          <span *ngSwitchCase="'progress'">
+            {{ row[col.column_key] }}%
+            <progress [value]="row[col.column_key]" max="100"></progress>
+          </span>
+
+          
+          <span *ngSwitchCase="'tags'">
+            <span *ngFor="let tag of row.teams"
+                  [style.color]="tag.text_color"
+                  [style.backgroundColor]="tag.background_color"
+                  style="padding: 2px 6px; margin: 2px; border-radius: 4px; display: inline-block;">
+              {{ tag.value }}
+            </span>
+          </span>
+
+          
+          <span *ngSwitchDefault>{{ row[col.column_key] }}</span>
+        </ng-container>
+</td>
+    <td>
+        <i class="bi bi-pencil-square icon"  (click)="editRow(row)"></i>
+       <i class="bi bi-trash3 icon" (click)="deleteRow(row.id)"></i>
+      </td>
+
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="pagination">
+    <button class="prevBtn" > <i class="bi bi-arrow-left"></i> Previous</button>
+    <div class="page-numbers">
+    <button class="page-number-btn btn btn-light">1</button>
+    <button class="page-number-btn btn btn-light">2</button>
+    <button class="page-number-btn btn btn-light">3</button>
+    <button class="page-number-btn btn btn-light">...</button>
+    <button class="page-number-btn btn btn-light">8</button>
+    <button class="page-number-btn btn btn-light">9</button>
+    <button class="page-number-btn btn btn-light">10</button>
+  </div>
+    <button class="next-btn">Next <i class="bi bi-arrow-right"></i></button>
+  </div>
+
+  
+  
+</div> 
+</div>
+<div *ngIf="showModal" class="edit-modal">
+    <div class="modal-background">
+      <h4>Update Data</h4>
+      <div class="form-group row">
+      <label class="col-5" >First Name:</label>
+      <input class="col-6 input-box"[(ngModel)]="editableRow.name.first_name" /><br />
+    </div>
+
+      <div class="form-group row">
+      <label class="col-5">Last Name:</label>
+      <input class="col-6 input-box" [(ngModel)]="editableRow.name.last_name" /><br />
+    </div>
+
+      <div class="form-group row">
+      <label class="col-5" >Status:</label>
+      <input class="col-6 input-box" [(ngModel)]="editableRow.status" /><br />
+    </div>
+
+      <div class="form-group row">
+      <label class="col-5">Role:</label>
+      <input class="col-6 input-box" [(ngModel)]="editableRow.role" /><br />
+    </div>
+
+      <div class="form-group row">
+      <label class="col-5" >License Used:</label>
+      <input class="col-6 input-box" type="number" [(ngModel)]="editableRow.license_used" /><br /><br />
+    </div>
+
+       <button class="save-btn btn btn-danger" (click)="cancelEdit()">Cancel</button>
+      <button class="save-btn btn btn-success" (click)="saveEdit()">Save</button>
+      
+    </div>
+  </div>

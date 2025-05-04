@@ -1,0 +1,70 @@
+
+<div class="header-details">
+<h3 class="">Welcome back, {{userName}}</h3>
+<div style="display: flex;">
+  <input class="top-search-export" type="search" placeholder="Search"/>
+  <button class="top-search-export"> <i class="bi bi-sliders"></i> Customize </button>
+  <button class="top-search-export"> <i class="bi bi-cloud-download" ></i> Export</button>
+  
+</div>
+</div>
+<div class="chart-container">
+<div class="main-card-barchart">
+    <div class="header">
+      <i class="bi bi-boxes" style="font-size: 2rem;margin: 20px;"></i>
+      <div class="">
+        <h4>Vendors Breakdown</h4>
+        <p>Keep track of vendors and their security ratings</p>
+      </div>
+    </div>
+<div id="chart" class="barChart">
+    <apx-chart
+      [series]="chartOptions.series!"
+      [chart]="chartOptions.chart!"
+      [dataLabels]="chartOptions.dataLabels!"
+      [plotOptions]="chartOptions.plotOptions!"
+      [responsive]="chartOptions.responsive!"
+      [xaxis]="chartOptions.xaxis!"
+      [legend]="chartOptions.legend!"
+      [fill]="chartOptions.fill!"
+      [yaxis]="chartOptions.yaxis!"
+      [colors]="chartOptions.colors!"
+    ></apx-chart>
+  </div>
+  <div class="footer">
+    <button class="upgrade-button">View full report</button>
+     </div>
+  </div>
+
+  <div class="main-card">
+    <div class="header">
+      <div class="vendor-details">
+        <h4>Vendors Monitored</h4>
+        <p>You are using 80% of available spots.</p>
+      </div>
+      <div class="menu-icon">
+        <i class="bi bi-three-dots-vertical"></i>
+      </div>
+    </div>
+    <div id="chart2">
+        <apx-chart
+          [series]="chartOptionsSemiCircle.series!"
+          [chart]="chartOptionsSemiCircle.chart!"
+          [plotOptions]="chartOptionsSemiCircle.plotOptions!"
+          [labels]="chartOptionsSemiCircle.labels!"
+          [fill]="chartOptionsSemiCircle.fill!"
+          [colors]="chartOptionsSemiCircle.colors!"
+        ></apx-chart>
+      </div>
+      <div class="warning-info" >
+        <span class="warning">You've almost reached your limit</span><br />
+       
+        <span class="warning-details">You have used 80% of your available spots.</span><br />
+        <span class="warning-details">Upgrade plan to monitor more vendors</span>
+      </div>
+      <div class="footer">
+     <button class="upgrade-button"> <i class="bi bi-lightning-charge"></i> Upgrade Plan</button>
+      </div>
+  </div>
+
+</div>
