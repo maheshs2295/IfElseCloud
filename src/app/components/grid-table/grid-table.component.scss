@@ -12,12 +12,20 @@
    display: inline-flex;
    padding: 10px;
 }
+.team-member-text{
+   font-size: 20px;
+}
 .team-member-count{
     margin: 7px;
     background-color: #B48BE2
 
 }
-
+.tags-style{
+    padding: 2px 6px;
+     margin: 2px; 
+     border-radius: 4px; 
+     display: inline-block;
+}
 .grid-container{
     padding:10px;
     

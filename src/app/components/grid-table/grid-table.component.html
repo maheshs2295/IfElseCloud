@@ -1,7 +1,7 @@
 
 <div class="main-card">
 <div class="team-member">
-<span class="" style="font-size: 20px;">Team Members </span> 
+<span class="team-member-text" >Team Members </span> 
 <span class="badge rounded-pill team-member-count">{{totalTeamMembers}} users</span>
 </div>
 
@@ -41,25 +41,18 @@
           <span> {{ row.name.first_name }} {{ row.name.last_name }} </span><br />
           ({{ row.name.handle }}) 
           </span>
-
-         
           <span *ngSwitchCase="'status'">{{ row.status }}</span>
-
-          
           <span *ngSwitchCase="'text'">{{ row[col.column_key] }}</span>
-
-          
           <span *ngSwitchCase="'progress'">
             {{ row[col.column_key] }}%
             <progress [value]="row[col.column_key]" max="100"></progress>
           </span>
 
-          
           <span *ngSwitchCase="'tags'">
             <span *ngFor="let tag of row.teams"
                   [style.color]="tag.text_color"
                   [style.backgroundColor]="tag.background_color"
-                  style="padding: 2px 6px; margin: 2px; border-radius: 4px; display: inline-block;">
+                  class="tags-style">
               {{ tag.value }}
             </span>
           </span>
