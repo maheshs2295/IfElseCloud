@@ -14,13 +14,12 @@ rows:any = [];
 showModal:boolean = false;
 editableRow:any;
 totalTeamMembers:any;
+selectedRowIds = new Set<string>();
 ngOnInit(): void{
-  console.log(this.gridData.grid_data.length,"data");
   this.totalTeamMembers = this.gridData.grid_data.length
 if(this.gridData){
   this.columns = this.gridData.grid_columns;
   this.rows = this.gridData.grid_data
-  console.log(this.columns[0].column_name)
 }
 
 
@@ -28,8 +27,6 @@ if(this.gridData){
 editRow(row:any){
   this.showModal = true;
   this.editableRow = row;
-  console.log(row.name,"row")
-  console.log(row.name.first_name,"row")
 }
 
 deleteRow(row:any){
@@ -47,7 +44,7 @@ cancelEdit() {
   this.showModal = false;
   this.editableRow = null;
 }
-selectedRowIds = new Set<string>();
+
 toggleRowSelection(id: string) {
   this.selectedRowIds.has(id)
     ? this.selectedRowIds.delete(id)
@@ -59,7 +56,8 @@ isSelected(id: string): boolean {
 }
 
 get allSelected(): boolean {
-  return this.gridData.grid_data.length > 0 && this.gridData.grid_data.every((row:any) => this.selectedRowIds.has(row.id));
+  return this.gridData.grid_data.length > 0 && 
+  this.gridData.grid_data.every((row:any) => this.selectedRowIds.has(row.id));
 }
 
 toggleSelectAll() {
